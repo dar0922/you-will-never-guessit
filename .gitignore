@@ -1,160 +1,77 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+import time
 
-# C extensions
-*.so
+#welcoming the user
+name = input("What is your name? ")
 
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
+print ("Hello, " + name, "Time to play hangman!")
 
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
+#wait for 1 second
+time.sleep(1)
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+print ("Start guessing...")
+time.sleep(0.5)
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-cover/
+#here we set the secret. You can select any word to play with. 
+word = ("Vilyuchinsk")
 
-# Translations
-*.mo
-*.pot
+#creates an variable with an empty value
+guesses = ''
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
+#determine the number of turns
+turns = 10
 
-# Flask stuff:
-instance/
-.webassets-cache
+# Create a while loop
 
-# Scrapy stuff:
-.scrapy
+#check if the turns are more than zero
+while turns > 0:         
 
-# Sphinx documentation
-docs/_build/
+    # make a counter that starts with zero
+    failed = 0             
 
-# PyBuilder
-.pybuilder/
-target/
+    # for every character in secret_word    
+    for char in word:      
 
-# Jupyter Notebook
-.ipynb_checkpoints
+    # see if the character is in the players guess
+        if char in guesses:    
+    
+        # print then out the character
+            print (char,end=""),    
 
-# IPython
-profile_default/
-ipython_config.py
+        else:
+    
+        # if not found, print a dash
+            print ("_",end=""),     
+       
+        # and increase the failed counter with one
+            failed += 1    
 
-# pyenv
-#   For a library or package, you might want to ignore these files since the code is
-#   intended to run in multiple environments; otherwise, check them in:
-# .python-version
+    # if failed is equal to zero
 
-# pipenv
-#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
-#   However, in case of collaboration, if having platform-specific dependencies or dependencies
-#   having no cross-platform support, pipenv may install dependencies that don't work, or not
-#   install all needed dependencies.
-#Pipfile.lock
+    # print You Won
+    if failed == 0:        
+        print ("You won")
+    # exit the script
+        break            
+    # ask the user go guess a character
+    guess = input("guess a character:") 
 
-# poetry
-#   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
-#   This is especially recommended for binary packages to ensure reproducibility, and is more
-#   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
-#poetry.lock
+    # set the players guess to guesses
+    guesses += guess                    
 
-# pdm
-#   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
-#pdm.lock
-#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
-#   in version control.
-#   https://pdm.fming.dev/#use-with-ide
-.pdm.toml
-
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
-__pypackages__/
-
-# Celery stuff
-celerybeat-schedule
-celerybeat.pid
-
-# SageMath parsed files
-*.sage.py
-
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
-# Spyder project settings
-.spyderproject
-.spyproject
-
-# Rope project settings
-.ropeproject
-
-# mkdocs documentation
-/site
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# Pyre type checker
-.pyre/
-
-# pytype static type analyzer
-.pytype/
-
-# Cython debug symbols
-cython_debug/
-
-# PyCharm
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+    # if the guess is not found in the secret word
+    if guess not in word:  
+ 
+     # turns counter decreases with 1 (now 9)
+        turns -= 1        
+ 
+    # print wrong
+        print ("Wrong")  
+ 
+    # how many turns are left
+        print ("You have", + turns, 'more guesses' )
+ 
+    # if the turns are equal to zero
+        if turns == 0:           
+    
+        # print "You Lose"
+            print ("You Lose"  )
